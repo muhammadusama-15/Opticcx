@@ -7,7 +7,7 @@ from flask_gravatar import Gravatar
 from flask_login import UserMixin, login_user, LoginManager, current_user, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Text, Float
+from sqlalchemy import Integer, String, Text
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
@@ -88,7 +88,7 @@ class Product(db.Model):
     #author = relationship("User", back_populates="posts")
 
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
-    price: Mapped[float] = mapped_column(Float(250), nullable=False)
+    price: Mapped[float] = mapped_column(Integer(250), nullable=False)
     body: Mapped[str] = mapped_column(Text, nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
     
