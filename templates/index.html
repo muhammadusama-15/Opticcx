@@ -1,0 +1,73 @@
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/opticcx1.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>OPTICCX</h1>
+          <span class="subheading">Designed to frame your world.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  {% for post in all_posts %}
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Post preview-->
+      <a href="{{url_for('show_post',post_id=post.id)}}">
+        <div class="product-card">
+          <img src={{post.img_url}} alt="Product Image">
+          <div class="product-details">
+              <h2>{{ post.title }}</h2>
+              <!--<p>{{post.body|safe}}</p>-->
+              <span class="price">Rs {{post.price}}</span>
+              {% if current_user.id != 1%}
+                <a type="button" class="button btn-primary" href="{{url_for('buy_now',product_id=post.id)}}" style="text-decoration: underline;">Buy Now</a>
+              {% endif %}
+          </div>
+        </div>
+        
+      </a>
+      <p class="post-meta">
+          <!-- TODO: Only show delete button if user id is 1 (admin user) -->
+          {% if admin %}
+          <div class="row" style="margin-left: 5%;">
+            <a href="#" class="btn btn-primary col-6" style="height: fit-content; width: fit-content; margin-right:  2%;">Edit Item</a>
+            <a href="{{url_for('delete_post', post_id=post.id) }}" class="btn btn-danger col-6" style="height: fit-content; width: fit-content;">Delete Item</a>
+          </div>
+          {% endif %}
+      </p>
+    </div>
+  </div>
+      {% endfor %}  
+    </div>
+      
+    <!-- Divider-->
+    <hr class="my-4" />
+
+      <!-- New Post -->
+      <!-- TODO: Only show Create Post button if user id is 1 (admin user) -->
+      {% if admin %}
+      <div class="d-flex justify-content-center mb-4">
+        <a
+          class="btn btn-primary float-right"
+          href="{{url_for('add_new_post')}}"
+          >Add New Product</a
+        >
+      </div>
+      {% endif %}
+
+      <!-- Pager-->
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
