@@ -88,7 +88,7 @@ class Product(db.Model):
     #author = relationship("User", back_populates="posts")
 
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
-    price: Mapped[float] = mapped_column(Integer(250), nullable=False)
+    price: Mapped[float] = mapped_column(Integer, nullable=False)
     body: Mapped[str] = mapped_column(Text, nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
     
